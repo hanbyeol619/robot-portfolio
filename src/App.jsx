@@ -80,7 +80,11 @@ export default function App() {
 
   useEffect(() => {
     if (!photo) return
-    const onKey = (e) => e.key === 'Escape' && setPhoto(null)
+    const onKey = (e) => {
+      if (e.key === 'Escape') setPhoto(null)
+      if (e.key === 'ArrowRight') setPhoto((p) => ({ ...p, i: (p.i + 1) % p.list.length }))
+      if (e.key === 'ArrowLeft') setPhoto((p) => ({ ...p, i: (p.i - 1 + p.list.length) % p.list.length }))
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [photo])
@@ -178,19 +182,11 @@ export default function App() {
                 <h3>{a.title}</h3>
                 <p className="mono">{[a.date, a.place].filter(Boolean).join(' · ')}</p>
                 <p className="act-desc">{a.desc}</p>
+                {a.highlights?.length > 0 && (
+                  <ul className="dash act-hl">{a.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
+                )}
               </div>
-              {a.photos.length ? (
-                <div className="act-photos">
-                  {a.photos.map((ph, i) => (
-                    <button key={ph.src} className={`act-photo ${i === 0 ? 'first' : ''}`} onClick={() => setPhoto(ph)} aria-label={`사진 크게 보기: ${ph.caption || a.title}`}>
-                      <img src={ph.src} alt={ph.caption || a.title} loading="lazy" />
-                      {ph.caption && <span>{ph.caption}</span>}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="empty">현장 사진을 곧 추가할게요.</div>
-              )}
+              <ActivityPhotos a={a} onOpen={(list, i) => setPhoto({ list, i })} />
             </article>
           ))}
         </section>
@@ -224,10 +220,7 @@ export default function App() {
       </section>
 
       {photo && (
-        <div className="lightbox" role="dialog" aria-label="사진 크게 보기" onClick={() => setPhoto(null)}>
-          <img src={photo.src} alt={photo.caption || ''} />
-          {photo.caption && <p>{photo.caption}</p>}
-        </div>
+        <Lightbox photo={photo} setPhoto={setPhoto} />
       )}
 
       {current && (
@@ -301,6 +294,73 @@ function ContactRow({ k, v, href, copy }) {
           {done ? '복사됨' : '복사'}
         </button>
       )}
+    </div>
+  )
+}
+
+const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(src)
+
+function ActivityPhotos({ a, onOpen }) {
+  const groups = a.groups?.length ? a.groups : [{ name: '사진', photos: a.photos || [] }]
+  const [tab, setTab] = useState(0)
+  const [all, setAll] = useState(false)
+  const total = groups.reduce((n, g) => n + g.photos.length, 0)
+  if (!total) return <div className="empty">현장 사진을 곧 추가할게요.</div>
+  const list = groups[tab].photos
+  const LIMIT = 7
+  const shown = all ? list : list.slice(0, LIMIT)
+  return (
+    <div className="act-gallery">
+      {groups.length > 1 && (
+        <div className="act-tabs" role="tablist" aria-label="사진 묶음">
+          {groups.map((g, i) => (
+            <button key={g.name} role="tab" aria-selected={tab === i} className={tab === i ? 'on' : ''} onClick={() => { setTab(i); setAll(false) }}>
+              {g.name} <span>{g.photos.length}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="act-photos">
+        {shown.map((ph, i) => (
+          <button key={ph.src} className={`act-photo ${i === 0 ? 'first' : ''}`} onClick={() => onOpen(list, i)} aria-label={`사진 크게 보기: ${ph.caption || a.title}`}>
+            {isVideo(ph.src) ? (
+              <>
+                <video src={ph.src} poster={ph.poster} muted loop playsInline autoPlay preload="metadata" />
+                <i className="play-badge" aria-hidden="true">▶</i>
+              </>
+            ) : (
+              <img src={ph.src} alt={ph.caption || a.title} loading="lazy" />
+            )}
+            {ph.caption && <span>{ph.caption}</span>}
+          </button>
+        ))}
+      </div>
+      {list.length > LIMIT && (
+        <button className="more-btn" onClick={() => setAll((v) => !v)}>
+          {all ? '접기' : `사진 ${list.length - LIMIT}장 더 보기`}
+        </button>
+      )}
+    </div>
+  )
+}
+
+function Lightbox({ photo, setPhoto }) {
+  const ph = photo.list[photo.i]
+  const go = (d) => (e) => {
+    e.stopPropagation()
+    setPhoto((p) => ({ ...p, i: (p.i + d + p.list.length) % p.list.length }))
+  }
+  return (
+    <div className="lightbox" role="dialog" aria-label="사진 크게 보기" onClick={() => setPhoto(null)}>
+      {isVideo(ph.src) ? (
+        <video key={ph.src} src={ph.src} poster={ph.poster} controls autoPlay muted loop playsInline onClick={(e) => e.stopPropagation()} />
+      ) : (
+        <img src={ph.src} alt={ph.caption || ''} onClick={(e) => e.stopPropagation()} />
+      )}
+      <p>{ph.caption} <span className="lb-count">{photo.i + 1} / {photo.list.length}</span></p>
+      <button className="lb-nav lb-prev" onClick={go(-1)} aria-label="이전 사진">←</button>
+      <button className="lb-nav lb-next" onClick={go(1)} aria-label="다음 사진">→</button>
+      <button className="lb-close" onClick={() => setPhoto(null)} aria-label="닫기">✕</button>
     </div>
   )
 }
