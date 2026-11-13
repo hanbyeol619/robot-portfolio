@@ -78,6 +78,7 @@ export default function ProjectPanel({ project, onClose, onNav, index, total }) 
           <p className="mono accent">{project.code}</p>
           <h2 id="panel-title">{project.title}</h2>
           <p className="panel-sub">{project.subtitle}</p>
+          {project.status === 'planned' && <p className="plan-note">진행 예정인 프로젝트예요. 시작하면 과정과 결과를 이곳에 채워 나갈게요.</p>}
 
           {meta.length > 0 && (
             <dl className="meta">
@@ -102,7 +103,7 @@ export default function ProjectPanel({ project, onClose, onNav, index, total }) 
 
           {project.work.length > 0 && (
             <section>
-              <h3>내가 한 일</h3>
+              <h3>{project.status === 'planned' ? '진행 계획' : '내가 한 일'}</h3>
               <div className="work">
                 {project.work.map((w) => (
                   <div key={w.title}><h4>{w.title}</h4><p>{w.desc}</p></div>

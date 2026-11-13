@@ -184,6 +184,7 @@ export default function App() {
                 {a.highlights?.length > 0 && (
                   <ul className="dash act-hl">{a.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
                 )}
+                {a.takeaway && <p className="act-take">{a.takeaway}</p>}
               </div>
               <ActivityPhotos a={a} onOpen={(list, i) => setPhoto({ list, i })} />
             </article>
@@ -270,7 +271,7 @@ function ProjectCard({ p, big, onOpen }) {
         <span className="card-code mono">{p.code}</span>
       </div>
       <div className="card-text">
-        <p className="mono">{p.label}</p>
+        <p className="mono">{p.label}{p.status === 'planned' && <span className="badge-plan">진행 예정</span>}</p>
         <h3>{p.title}</h3>
         <p className="muted">{p.subtitle}</p>
         <ul className="tags">{p.tags.slice(0, big ? 5 : 3).map((t) => <li key={t}>{t}</li>)}</ul>

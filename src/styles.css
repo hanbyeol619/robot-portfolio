@@ -323,3 +323,13 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .cur-ring.hover { width: 52px; height: 52px; margin: -26px 0 0 -26px; border-color: var(--accent); }
 .cur-ring.view { width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--accent); border-color: var(--accent); }
 .cur-ring.view span { opacity: 1; }
+
+.act-take {
+  margin-top: 14px; padding: 14px 18px; border-left: 3px solid var(--accent); background: var(--surface);
+  font-family: var(--f-body); font-weight: 500; font-size: 16px; line-height: 1.7; border-radius: 0 12px 12px 0;
+}
+.badge-plan {
+  margin-left: 8px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--c, var(--accent)); color: var(--c, var(--accent));
+  font-size: 10.5px; letter-spacing: 0.08em; vertical-align: 1px;
+}
+.plan-note { font-size: 14px; color: var(--muted); padding: 10px 14px; border: 1px dashed var(--line); border-radius: 10px; }
