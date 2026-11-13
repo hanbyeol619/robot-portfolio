@@ -20,7 +20,7 @@ export const profile = {
   strengths: ['물류 현장 경험', '사무 업무 개선', 'AI 활용 개발', 'ROS 2', '로봇 제어', '문제 발견 → 개선'],
 
   // 연락처 (비워 두면 화면에 나오지 않아요)
-  email: '',      // 예: 'hello@example.com'
+  email: 'hb052532@gmail.com',
   github: '',     // 예: 'https://github.com/아이디'
   blog: '',       // 예: 'https://blog.naver.com/아이디'
 
