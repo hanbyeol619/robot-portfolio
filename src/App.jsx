@@ -154,8 +154,8 @@ export default function App() {
       <section id="work" className="work-section">
         <div className="section-head">
           <p className="mono">SELECTED WORK · 04</p>
-          <h2>네 개의 구역,<br />하나의 로봇 시스템</h2>
-          <p className="muted">메인 통합 프로젝트와, 그 안에 들어간 세 개의 프로젝트예요. 구역을 누르면 작업 과정과 사진, 영상을 볼 수 있어요.</p>
+          <h2>하나씩 배우고,<br />하나로 잇습니다</h2>
+          <p className="muted">로봇팔, 자율주행, 모방학습을 하나씩 익히고, 그 기술을 하나의 로봇으로 이어 가는 과정이에요. 프로젝트를 누르면 작업 과정과 사진, 영상을 볼 수 있어요.</p>
         </div>
 
         <ProjectCard p={main} big onOpen={openProject} />
