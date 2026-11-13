@@ -23,7 +23,7 @@ function Video({ v }) {
     )
   return (
     <div className="video-frame">
-      <video src={v.src} controls playsInline preload="metadata" />
+      <video src={v.src} poster={v.poster} controls playsInline preload="metadata" />
     </div>
   )
 }

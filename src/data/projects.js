@@ -62,8 +62,13 @@ export const projects = [
     ],
     results: [],
     cover: '',
-    photos: [],
-    videos: [],
+    photos: [
+      { src: 'media/arm/arm-01.jpg', caption: '묘목 이식 작업대: 화분과 모종삽, 물병을 둔 실습 환경' },
+      { src: 'media/arm/arm-02.jpg', caption: '실습에 사용한 두산 협동 로봇팔' },
+    ],
+    videos: [
+      { type: 'file', src: 'media/arm/demo.mp4', poster: 'media/arm/demo-poster.jpg', title: '로봇팔 묘목 프로젝트 시연 영상' },
+    ],
     links: [],
   },
   {
