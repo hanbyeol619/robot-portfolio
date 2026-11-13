@@ -5,13 +5,13 @@ import { RoundedBox, Environment, Lightformer, ContactShadows, PerspectiveCamera
 import { M, lathe } from './materials'
 
 /* ───────── 조명 · 스튜디오 ───────── */
-export function Studio({ shadowScale = 12, shadowOpacity = 0.55, shadowY = 0, far = 4 }) {
+export function Studio({ shadowScale = 12, shadowOpacity = 0.55, shadowY = 0, far = 4, intensity = 1 }) {
   return (
     <>
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[4, 8, 5]} intensity={1.6} />
-      <directionalLight position={[-6, 3, -4]} intensity={0.5} color="#dfe8ff" />
-      <Environment resolution={256} frames={1}>
+      <ambientLight intensity={0.25 * intensity} />
+      <directionalLight position={[4, 8, 5]} intensity={1.6 * intensity} />
+      <directionalLight position={[-6, 3, -4]} intensity={0.5 * intensity} color="#dfe8ff" />
+      <Environment resolution={256} frames={1} environmentIntensity={intensity}>
         <Lightformer form="rect" intensity={3} position={[0, 6, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
         <Lightformer form="rect" intensity={2} position={[-6, 2, 2]} rotation-y={Math.PI / 2} scale={[8, 3, 1]} />
         <Lightformer form="rect" intensity={1.4} position={[6, 2, -2]} rotation-y={-Math.PI / 2} scale={[8, 3, 1]} />

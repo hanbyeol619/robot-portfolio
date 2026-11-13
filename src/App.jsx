@@ -3,7 +3,9 @@ import { Canvas } from '@react-three/fiber'
 import { View } from '@react-three/drei'
 import { profile } from './data/profile'
 import { projects } from './data/projects'
-import { HeroScene, ArmScene, DrivingScene, OmxScene, MainScene } from './three/scenes'
+import { ArmScene, DrivingScene, OmxScene, MainScene } from './three/scenes'
+import HeroCanvas from './three/Hero'
+import { BootIntro, Marquee, Cursor, useBoot } from './components/Flair'
 import ProjectPanel from './components/ProjectPanel'
 
 const SCENES = { main: MainScene, arm: ArmScene, driving: DrivingScene, omx: OmxScene }
@@ -36,6 +38,7 @@ export default function App() {
   const progress = useRef(0)
   const [open, setOpen] = useState(null)
   const [photo, setPhoto] = useState(null)
+  const { showIntro, bootDelay, finishIntro } = useBoot()
 
   // 스크롤 → 첫 화면 진행도
   useEffect(() => {
@@ -125,16 +128,10 @@ export default function App() {
       {/* ── 첫 화면 ── */}
       <section className="hero" ref={heroRef} id="top">
         <div className="hero-sticky">
-          <div className="hero-type" aria-hidden="true">
-            <span>ROBOTS</span>
-            <span>FOR PEOPLE</span>
-          </div>
           {profile.heroVideo ? (
             <HeroVideo src={profile.heroVideo} progress={progress} />
           ) : (
-            <View className="hero-view">
-              <HeroScene progress={progress} />
-            </View>
+            <HeroCanvas progress={progress} bootDelay={bootDelay} />
           )}
           <div className="hero-meta">
             <p className="mono">PORTFOLIO — {profile.year}</p>
@@ -154,6 +151,8 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      <Marquee items={['ROBOT ARM', 'AUTONOMOUS DRIVING', 'IMITATION LEARNING', 'SYSTEM INTEGRATION', 'PHYSICAL AI']} />
 
       {/* ── 프로젝트 4구역 ── */}
       <section id="work" className="work-section">
@@ -232,6 +231,9 @@ export default function App() {
           onNav={nav}
         />
       )}
+
+      {showIntro && <BootIntro name={profile.nameEn} onDone={finishIntro} />}
+      <Cursor />
 
       <Canvas
         className="gl"
