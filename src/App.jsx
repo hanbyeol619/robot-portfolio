@@ -211,8 +211,9 @@ export default function App() {
         <div className="contact-rows">
           {profile.email && <ContactRow k="EMAIL" v={profile.email} copy />}
           {profile.github && <ContactRow k="GITHUB" v={profile.github} href={profile.github} />}
+          {profile.notion && <ContactRow k="NOTION" v={`${profile.notionLabel || 'Notion'} ↗`} href={profile.notion} />}
           {profile.blog && <ContactRow k="BLOG" v={profile.blog} href={profile.blog} />}
-          {!profile.email && !profile.github && !profile.blog && (
+          {!profile.email && !profile.github && !profile.blog && !profile.notion && (
             <p className="muted">연락처는 src/data/profile.js 에서 채울 수 있어요.</p>
           )}
         </div>

@@ -23,6 +23,8 @@ export const profile = {
   email: 'hb052532@gmail.com',
   github: '',     // 예: 'https://github.com/아이디'
   blog: '',       // 예: 'https://blog.naver.com/아이디'
+  notion: 'https://app.notion.com/p/Robotics-Study-Wiki-3f99d1547a5380f5a5bfe05609e4f95e',
+  notionLabel: 'Robotics Study Wiki',   // 화면에 보이는 이름
 
   // 힉스필드(Higgsfield) 등으로 만든 첫 화면 영상
   // public/media/hero.mp4 에 넣고 아래를 '/media/hero.mp4' 로 바꾸면
