@@ -65,11 +65,6 @@ export const profile = {
             { src: 'media/activity/ai-day-06.jpg', caption: 'Isaac Lab으로 시뮬레이션한 로봇팔 차량 도어 샌딩' },
             { src: 'media/activity/ai-day-07.jpg', caption: 'Cosmos 3 활용: 비전 추론, 데이터 생성, 월드 시뮬레이션' },
             { src: 'media/activity/ai-day-08.jpg', caption: 'AI로 생성한 환경에서 걷기를 배우는 소형 로봇들' },
-          ],
-        },
-        {
-          name: 'AI · 데이터 사례',
-          photos: [
             { src: 'media/activity/ai-day-09.jpg', caption: '세션: Agentic AI — Reasoning, NIM, Multi-Agent Orchestration (Jonathan Cohen)' },
             { src: 'media/activity/ai-day-10.jpg', caption: 'DexBench: 로봇 정책의 일반화 능력을 평가하는 벤치마크' },
             { src: 'media/activity/ai-day-11.jpg', caption: 'Sim → 실사 데이터 엔진: 구조와 라벨은 Sim, 외형은 Cosmos3' },
