@@ -9,11 +9,7 @@ import { BootIntro, Marquee, Cursor, useBoot } from './components/Flair'
 import ProjectPanel from './components/ProjectPanel'
 
 const SCENES = { main: MainScene, arm: ArmScene, driving: DrivingScene, omx: OmxScene }
-const CAPTIONS = [
-  { at: 0.22, text: '사람이 허리를 숙여 반복하던 일을' },
-  { at: 0.5, text: '로봇의 정확한 동작으로 바꾸고' },
-  { at: 0.8, text: '현장을 조금 더 이롭게 만듭니다' },
-]
+const CAPTIONS = profile.beliefs.map((text, i, arr) => ({ text, at: 0.2 + (i * 0.6) / Math.max(1, arr.length - 1) }))
 
 function HeroVideo({ src, progress }) {
   const ref = useRef(null)
