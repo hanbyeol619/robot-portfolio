@@ -68,7 +68,7 @@ export const projects = [
       { src: 'media/arm/arm-02.jpg', caption: '실습에 사용한 두산 협동 로봇팔' },
     ],
     videos: [
-      { type: 'file', src: 'media/arm/demo.mp4', poster: 'media/arm/demo-poster.jpg', title: '음성 명령 시연: 팀원과 함께 LLM으로 음성과 로봇팔을 연결해, 말로 지시하면 로봇팔이 움직여요' },
+      { type: 'file', src: 'media/arm/demo-2611.mp4', poster: 'media/arm/demo-2611-poster.jpg', title: '관제 UI 시연: 실제 로봇에 연결해 말로 지시하면, 비전 카메라가 빈 자리를 확인하고 로봇팔이 묘목을 옮겨 심어요 (식재 2/4 → 4/4)' },
     ],
     links: [],
   },
