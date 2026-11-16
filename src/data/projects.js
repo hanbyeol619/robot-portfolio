@@ -93,7 +93,9 @@ export const projects = [
     results: [],
     cover: '',
     photos: [],
-    videos: [],
+    videos: [
+      { type: 'file', src: 'media/driving/pinky-pro-2611.mp4', poster: 'media/driving/pinky-pro-2611-poster.jpg', title: '핑크랩 Pinky Pro 로봇 시연' },
+    ],
     links: [],
   },
   {
