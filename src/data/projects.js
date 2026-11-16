@@ -92,7 +92,11 @@ export const projects = [
     ],
     results: [],
     cover: '',
-    photos: [],
+    photos: [
+      { src: 'media/driving/pinky-01.jpg', caption: 'Pinky Pro: 화면에 HELLO! 인사 표시' },
+      { src: 'media/driving/pinky-02.jpg', caption: 'Pinky Pro: 시무룩한 표정' },
+      { src: 'media/driving/pinky-03.jpg', caption: 'Pinky Pro: 웃는 표정' },
+    ],
     videos: [
       { type: 'file', src: 'media/driving/pinky-pro-2611.mp4', poster: 'media/driving/pinky-pro-2611-poster.jpg', title: '핑크랩 Pinky Pro 로봇 시연' },
     ],
